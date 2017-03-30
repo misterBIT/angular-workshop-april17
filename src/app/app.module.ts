@@ -6,11 +6,13 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PetInputComponent } from './pets/pet-input.component';
 import {PetService} from './pets/pet.service';
+import { PetListComponent } from './pets/pet-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PetInputComponent
+    PetInputComponent,
+    PetListComponent
   ],
   imports: [
     BrowserModule,
