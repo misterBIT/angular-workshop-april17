@@ -16,7 +16,7 @@ import { PetListComponent } from './pets/pet-list.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
+    FormsModule, // notice that this must be included for ngModel to work
     HttpModule
   ],
   providers: [PetService],
