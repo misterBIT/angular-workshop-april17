@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { PetInputComponent } from './pets/pet-input.component';
+import {PetService} from './pets/pet.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { PetInputComponent } from './pets/pet-input.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [PetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
