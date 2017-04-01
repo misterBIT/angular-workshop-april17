@@ -4,6 +4,7 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PetsModule } from './pets/pets.module';
 import { SharedModule } from './shared/shared.module';
+import { TimeModule } from './time/time.module';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     SharedModule,
     PetsModule,
+    TimeModule,
     HttpModule
   ],
   providers: [],
