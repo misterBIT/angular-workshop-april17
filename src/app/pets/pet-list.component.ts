@@ -7,8 +7,9 @@ import {PetService} from './pet.service';
   template: `
     <section>
       <h2>Pet List</h2>
+      <letter-selector (select)="letter = $event"></letter-selector>
       <ul>
-        <li *ngFor="let currPet of petService.pets | petSearch:'c'">
+        <li *ngFor="let currPet of petService.pets | petSearch:letter">
           <pet-renderer  (awakeChange)="petService.toggleAwake(currPet)" [pet]="currPet"></pet-renderer>
         </li>
       </ul>
@@ -16,6 +17,7 @@ import {PetService} from './pet.service';
   `
 })
 export class PetListComponent {
+  letter = 'a';
   constructor(private petService: PetService) {
   }
 
