@@ -3,9 +3,10 @@ export class PetModel {
   // == Data Members ==
   id: number;
   name: string;
-
-  constructor(name = '') {
+  awake:boolean;
+  constructor(name = '',awake = true) {
     this.name = name;
+    this.awake = awake;
     this.id = ++PetModel.maxId;
   }
 
