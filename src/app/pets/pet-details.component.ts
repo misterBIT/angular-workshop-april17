@@ -14,6 +14,7 @@ import { PetService } from './pet.service';
         <countdown [to]="pet.nextFeedAt" (due)="petAwakeToggle()"></countdown>
       </div>
       <button (click)="feedPet()">Feed</button>
+      <a routerLink="../">back to list</a>
     </div>
   `,
   styles: []
