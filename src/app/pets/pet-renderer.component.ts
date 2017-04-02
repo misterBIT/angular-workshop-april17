@@ -20,7 +20,7 @@ import { PetModel } from './pet.model';
         <small>Time till asleep</small>
         <countdown [to]="pet.nextFeedAt" (due)="petAwakeToggle()"></countdown>
       </div>
-      <button (click)="feedPet()">Feed</button>
+      <button (click)="feedPet($event)">Feed</button>
     </div>`
 })
 export class PetRendererComponent {
@@ -32,8 +32,10 @@ export class PetRendererComponent {
     this.awakeChange.emit()
   }
 
-  feedPet() {
-    this.feed.emit(this.pet)
+  feedPet($event:MouseEvent) {
+    $event.stopPropagation();
+    this.feed.emit(this.pet);
+    return false;
   }
 
 }
