@@ -22,10 +22,11 @@ export class PetDetailsComponent implements OnInit {
   pet: PetModel;
 
   constructor(private activatedRoute: ActivatedRoute, private petService: PetService) {
+    this.pet = this.petService.pets[this.activatedRoute.snapshot.params['id']];
   }
 
   ngOnInit() {
-    this.pet = this.petService.pets[this.activatedRoute.snapshot.params['id']];
+
   }
 
 }
