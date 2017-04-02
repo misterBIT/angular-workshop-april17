@@ -1,3 +1,11 @@
+export enum Size{
+  tiny,
+  small,
+  medium,
+  large,
+  hugh
+}
+
 export class PetModel {
   static maxId: number = 0;
   private static feedingLastForMillis = 20000;
@@ -6,6 +14,8 @@ export class PetModel {
   name: string;
   awake: boolean;
   lastFed:number;
+  favouriteFoods:string[];
+  size:Size;
 
   get imgUrl(): string {
     return `assets/pet/${this.id}.png`;
