@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { PetService } from './pet.service';
 import { PetModel, Size } from './pet.model';
-
+const addInitialModel = {name: '', favouriteFoods: '', size: Size.medium};
 @Component({
   selector: 'pet-input',
   template: `
@@ -18,17 +18,18 @@ import { PetModel, Size } from './pet.model';
 })
 export class PetInputComponent {
   sizes = Size;
-  addModel = {name: '', favouriteFoods: '', size: Size.medium};
+  addModel = {...addInitialModel}
   petService: PetService;
 
   constructor(petService: PetService) {
     this.petService = petService;
   }
 
-  addPet(petName: string) {
+  addPet() {
     let petModel = new PetModel('');
     Object.assign(petModel, this.addModel);
     this.petService.addPet(petModel);
+    this.addModel = {...addInitialModel};
   }
 
 }

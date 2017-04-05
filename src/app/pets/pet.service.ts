@@ -1,4 +1,4 @@
-import {PetModel} from './pet.model';
+import { PetModel } from './pet.model';
 export class PetService {
 
   public pets: PetModel[] = [
@@ -9,6 +9,7 @@ export class PetService {
 
   addPet(pet: PetModel) {
     this.pets = [...this.pets, pet];
+    pet.id = this.pets.indexOf(pet);
     console.log('pet added', this.pets);
   }
 
