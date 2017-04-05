@@ -19,8 +19,8 @@ export class PetService {
   }
 
   toggleAwake(pet) {
-    pet.toggle();
-    // not a must for now, but keep this for when your pipe will filter by awake..
-    this.pets = [...this.pets];
+    let newModel = new PetModel();
+    Object.assign(newModel, pet, {awake: !pet.awake});
+    this.pets = [...this.pets.slice(0, this.pets.indexOf(pet)), newModel, ...this.pets.slice(this.pets.indexOf(pet) + 1)];
   }
 }
