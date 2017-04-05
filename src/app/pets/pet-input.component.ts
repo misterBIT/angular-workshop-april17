@@ -48,7 +48,7 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
       background-image: -webkit-gradient(linear, left top, left bottom, from(#ffaf46), to(#e78404));
       background-image: -webkit-linear-gradient(top, #ffaf46, #e78404);
       background-image: -moz-linear-gradient(top, #ffaf46, #e78404);
-      background-image: -ms-linear-gradient(top, #ffaf46, #e78404);
+      background-image: -ms-linear-gradient(top, #ffafdisabled46, #e78404);
       background-image: -o-linear-gradient(top, #ffaf46, #e78404);
       background-image: linear-gradient(to bottom, #ffaf46, #e78404);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ffaf46, endColorstr=#e78404);
@@ -74,7 +74,7 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
       <div class="form-control">
         <label for="name">Name:</label>
         <input type="text" #name="ngModel" required minlength="2" name="name" placeholder="Pet Name" ngModel/>
-        <div class="validation" *ngIf="name.dirty && name.invalid">
+        <div class="validation" *ngIf="name.touched && name.invalid">
           <span *ngIf="name.hasError('required')">Name is required</span>
           <span *ngIf="name.hasError('minlength')">Name must be longer than 2 letters</span>
         </div>
