@@ -11,9 +11,9 @@ import { PetService } from './pet.service';
       <img [src]="pet.imgUrl"/>
       <div>
         <small>Time till asleep</small>
-        <countdown [to]="pet.nextFeedAt" (due)="petAwakeToggle()"></countdown>
+        <countdown [to]="pet.nextFeedAt" (due)="pet.toggle()"></countdown>
       </div>
-      <button (click)="feedPet()">Feed</button>
+      <button (click)="pet.feed()">Feed</button>
       <a routerLink="../">back to list</a>
     </div>
   `,

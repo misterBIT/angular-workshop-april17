@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { PetService } from './pet.service';
 import { PetModel, Size } from './pet.model';
-import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { DoesNotEndWithCommaDirective } from '../shared/does-not-end-with-comma.directive';
 @Component({
   selector: 'pet-input',
   styles: [`
@@ -69,20 +70,19 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
   ],
   template: `
     <h4>Add Pet</h4>
-    <form #petForm="ngForm" (ngSubmit)="addPet(petForm)">
-
+    <form [formGroup]="petForm" (ngSubmit)="addPet()">
       <div class="form-control">
         <label for="name">Name:</label>
-        <input type="text" #name="ngModel" required minlength="2" name="name" placeholder="Pet Name" ngModel/>
-        <div class="validation" *ngIf="name.touched && name.invalid">
-          <span *ngIf="name.hasError('required')">Name is required</span>
-          <span *ngIf="name.hasError('minlength')">Name must be longer than 2 letters</span>
+        <input type="text" formControlName="name" placeholder="Pet Name"/>
+        <div class="validation" *ngIf="petForm.get('name').touched && petForm.controls.name.invalid">
+          <span *ngIf="petForm.hasError('required','name')">Name is required</span>
+          <span *ngIf="petForm.hasError('minlength','name')">Name must be longer than 2 letters</span>
         </div>
       </div>
 
       <div class="form-control">
         <label for="food">Favorite food:</label>
-        <input type="text" doesNotEndWithComma #food="ngModel" name="food" placeholder="Comma Separated" ngModel/>
+        <input type="text" #food="ngForm" [formControl]="petForm.controls.food" placeholder="Comma Separated"/>
         <div class="validation">
           <span *ngIf="food.hasError('commaEnd')">The input must not end with a comma</span>
         </div>
@@ -90,16 +90,25 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 
       <div class="form-control">
         <label for="size">Size:</label>
-        <select [ngModel]="sizes[sizes.medium]" name="size">
-          <option *ngFor="let size of sizes|iterateObject:true">{{sizes[size.key]}}
+        <select formControlName="size">
+          <option [ngValue]=size.key *ngFor="let size of sizes|iterateObject:true">{{size.value}}
           </option>
         </select>
       </div>
       <button class="submitBtn" [disabled]="petForm.invalid" type="submit">Add Pet</button>
     </form>
+    <!--<pre>-->
+    <!--{{petForm.value | json}}-->
+    <!--</pre>-->
   `
 })
 export class PetInputComponent {
+  petForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      food: new FormControl('', [DoesNotEndWithCommaDirective.Validator]),
+      size: new FormControl(Size.medium.toString())
+    }
+  )
   sizes = Size;
   petService: PetService;
 
@@ -107,11 +116,11 @@ export class PetInputComponent {
     this.petService = petService;
   }
 
-  addPet(petForm: NgForm) {
-    let petModel = new PetModel(petForm.value.name, true);
-    Object.assign(petModel, {size: this.sizes[petForm.value.size], favouriteFoods: petForm.value.food.split(',')});
+  addPet() {
+    let petModel = new PetModel(this.petForm.value.name, true);
+    Object.assign(petModel, {size: this.sizes[this.petForm.value.size], favouriteFoods: this.petForm.value.food.split(',')});
     this.petService.addPet(petModel);
-    petForm.resetForm({size: this.sizes[this.sizes.medium]})
+    this.petForm.reset({size: this.sizes[this.sizes.medium]})
   }
 
 }
