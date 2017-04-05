@@ -26,7 +26,7 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
       border-radius: 3px;
       font-size: 12px;
       font-family: arial, helvetica, sans-serif;
-      padding: 10px 10px 10px 10px;
+      padding: 10px 10px 10px;
       text-decoration: none;
       display: inline-block;
       text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3);
@@ -53,8 +53,8 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
       background-image: linear-gradient(to bottom, #ffaf46, #e78404);
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ffaf46, endColorstr=#e78404);
     }
-    
-    select{
+
+    select {
       height: 24px;
       background: lightgoldenrodyellow;
       color: brown;
@@ -77,8 +77,12 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 
       <div class="form-control">
         <label for="food">Favorite food:</label>
-        <input type="text" name="food" placeholder="Favourite Food" ngModel/>
+        <input type="text" doesNotEndWithComma #food="ngModel" name="food" placeholder="Comma Separated" ngModel/>
+        <div class="validation">
+          <span *ngIf="food.hasError('commaEnd')">The input must not end with a comma</span>
+        </div>
       </div>
+
       <div class="form-control">
         <label for="size">Size:</label>
         <select [ngModel]="sizes[sizes.medium]" name="size">
