@@ -54,6 +54,11 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
       filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#ffaf46, endColorstr=#e78404);
     }
 
+    .submitBtn:disabled {
+      background: grey none;
+      border: none;
+    }
+
     select {
       height: 24px;
       background: lightgoldenrodyellow;
@@ -90,7 +95,7 @@ import { FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
           </option>
         </select>
       </div>
-      <button class="submitBtn" type="submit">Add Pet</button>
+      <button class="submitBtn" [disabled]="petForm.invalid" type="submit">Add Pet</button>
     </form>
   `
 })
