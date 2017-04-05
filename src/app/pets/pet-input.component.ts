@@ -15,6 +15,10 @@ import { DoesNotEndWithCommaDirective } from '../shared/does-not-end-with-comma.
       margin-bottom: 10px;
     }
 
+    .form-control {
+      max-width: 300px;
+    }
+
     .validation {
       color: red;
     }
@@ -82,7 +86,7 @@ import { DoesNotEndWithCommaDirective } from '../shared/does-not-end-with-comma.
 
       <div class="form-control">
         <label for="food">Favorite food:</label>
-        <input type="text" #food="ngForm" [formControl]="petForm.controls.food" placeholder="Comma Separated"/>
+        <tag-input [separatorKeys]="[',']" #food="ngForm" [formControl]="petForm.controls.food" placeholder="Comma Separated"></tag-input>
         <div class="validation">
           <span *ngIf="food.hasError('commaEnd')">The input must not end with a comma</span>
         </div>

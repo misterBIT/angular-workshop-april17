@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { TimeModule } from './time/time.module';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { appRoutes } from './app.routes';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     RouterModule.forRoot(appRoutes),
     SharedModule,
     PetsModule,
