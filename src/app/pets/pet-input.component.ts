@@ -10,7 +10,7 @@ import { PetModel, Size } from './pet.model';
     <input type="text" placeholder="Pet Name" [(ngModel)]="addModel.name"/>
     <input type="text" placeholder="Favourite Food" [(ngModel)]="addModel.favouriteFoods"/>
     <select ([ngModel])="addModel.size">
-      <option *ngFor="let size of sizes|iterateObject">{{sizes[size.key]}}
+      <option *ngFor="let size of sizes|iterateObject:true">{{sizes[size.key]}}
       </option>
     </select>
     <button (click)="addPet()">Add Pet</button>

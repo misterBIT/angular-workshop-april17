@@ -5,8 +5,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class IterateObjectPipe implements PipeTransform {
-  transform(value: object,isEnum:false): any {
+  transform(value: object, isEnum: false): any {
     let keys = Object.keys(value);
-    return keys.map(key => ({key: key, value: value[key]}));
+    return keys
+      .map(key => ({key: key, value: value[key]}))
+      .filter(value => (isEnum) ? !isNaN(+value.key) : value);
   }
 }
