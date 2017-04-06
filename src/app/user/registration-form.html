@@ -1,41 +1,39 @@
-<form novalidate>
+<form [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()">
   <md-card>
     <md-card-title>Registration Form</md-card-title>
     <md-card-content>
       <div class="flex">
-        <input md-input placeholder="First name"/>
-        <input md-input placeholder="Last name"/>
+        <input formControlName="firstName" md-input placeholder="First name"/>
       </div>
-      <input md-input placeholder="Username"/>
+      <input formControlName="username" md-input placeholder="Username"/>
+      <div class="validation" *ngIf="userForm.hasError('*','username')">
+        <span *ngIf="userForm.hasError('required','username') " class="validationMsg">this field is required</span>
+      </div>
+      <input formControlName="password" md-input placeholder="Password"/>
+      <div class="validation" *ngIf="userForm.hasError('*','password')">
+        <span *ngIf="userForm.hasError('required','password') " class="validationMsg">this field is required</span>
+        <span *ngIf="userForm.hasError('minlength','password') " class="validationMsg">this field is required</span>
+      </div>
       <div>
-        <div>
+        <div formGroupName="address">
           <p>Address</p>
-          <input md-input placeholder="Street" required/>
+          <input formControlName="street" md-input placeholder="Street"/>
           <div class="flex align-center">
-            <input md-input placeholder="City"/>
-            <select>
-              <option value="" disabled>Select a state</option>
-              <option value="CA">CA</option>
-              <option value="NY">NY</option>
-            </select>
-            <input md-input placeholder="zip" type="number"/>
+            <input formControlName="city" md-input placeholder="City"/>
+            <input formControlName="zip" md-input placeholder="zip" type="number"/>
+            <div class="validation" *ngIf="userForm.get('address.zip').invalid && userForm.get('address.zip').touched">
+              <span *ngIf="userForm.hasError('pattern','address.zip') " class="validationMsg">Zip must be 5-7 chars long - numbers only</span>
+            </div>
           </div>
         </div>
-        <!--<button md-button (click)="addAddress()">ADD ADDRESS</button>-->
       </div>
-      <p>Would you like a newsletter?</p>
-      <label for="yes">
-        <input type="radio" id="yes">
-        Yes
-      </label>
-      <label for="no">
-        <input type="radio" id="no">
-        No
-      </label>
-      <input type="checkbox"> I am not a robot
+      <input formControlName="notRobot" type="checkbox"> I am not a robot
     </md-card-content>
     <md-card-actions align="end">
-      <button md-button color="primary" type="submit">SUBMIT</button>
+      <button [disabled]="userForm.invalid" md-button color="primary" type="submit">SUBMIT</button>
     </md-card-actions>
   </md-card>
 </form>
+<pre>
+  {{userForm.value|json}}
+</pre>

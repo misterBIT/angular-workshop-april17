@@ -7,4 +7,13 @@
   </span>
   {{title}}
 </h1>
+<nav>
+  <ul>
+    <li *ngIf="userService.isLoggedIn"><a routerLink="pets">Pets</a></li>
+    <!--will be displayed only if logged in-->
+    <li><a routerLink="register">Register</a></li>
+    <li><a routerLink="login">Login</a></li>
+  </ul>
+</nav>
+
 <router-outlet></router-outlet>
