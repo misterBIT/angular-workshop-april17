@@ -9,9 +9,10 @@ import { TimeModule } from '../time/time.module';
 import { PetsComponent } from './pets.component';
 import { PetDetailsComponent } from './pet-details.component';
 import { RouterModule, Routes } from '@angular/router';
+import { CanActivateUserAuth } from '../user/canActivateUserAuth.service';
 export const petRoutes: Routes = [
   {
-    path: 'pets', component: PetsComponent, children: [
+    path: 'pets', component: PetsComponent, canActivate: [CanActivateUserAuth], children: [
     {path: '', component: PetListComponent},
     {path: ':id', component: PetDetailsComponent}
   ]

@@ -4,6 +4,7 @@ import { UserRegistrationComponent } from './user-registration.component';
 import { RouterModule, Routes } from '@angular/router';
 import { UserService } from './user.service';
 import { UserLoginComponent } from './user-login.component';
+import { CanActivateUserAuth } from './canActivateUserAuth.service';
 const userRoutes: Routes = [
   {path: 'register', component: UserRegistrationComponent},
   {path: 'login', component: UserLoginComponent}
@@ -13,7 +14,7 @@ const userRoutes: Routes = [
     RouterModule.forChild(userRoutes),
     SharedModule
   ],
-  providers: [UserService],
+  providers: [UserService,CanActivateUserAuth],
   declarations: [UserRegistrationComponent, UserLoginComponent]
 })
 export class UserModule {
